@@ -7,14 +7,23 @@ spec:
   project: default
   source:
     repoURL: https://github.com/joao82/argocd-app-config.git
-    targetRevision: HEAD  # always the last commit of the github repository
-    path: dev             # track a specific path/folder in the repository
-  destination:    # endpoint k8s API server. 4us destination cluster is same where ArgoCD is deployed
+    # always the last commit of the github repository
+    targetRevision: HEAD
+    # track a specific path/folder in the repository
+    path: dev
+  # endpoint k8s API server. 4us destination cluster is same where ArgoCD is deployed
+  destination:    
     server: https://kubernetes.default.svc
-    namespace: myapp      # when argocd find configuration files will create a namespace
-  syncPolicy:     # attribute for synchronization 
-    syncOptions:  # ensures the namespace specified exists in the destination cluster
+    # when argocd find configuration files will create a namespace
+    namespace: myapp      
+  # attribute for synchronization 
+  syncPolicy:     
+    # ensures the namespace specified exists in the destination cluster
+    syncOptions:  
     - CreateNamespace=true
-    automated:        # by default is turn-off automatic sync "every 3 minutes"
-      selfHeal: true  # enable automatic self-healing: by default changes made to live cluster will not trigger automated sync
-      prune: true     # enable automatic prunning: by default automatIC sync will not delete resources
+    # by default is turn-off automatic sync "every 3 minutes"
+    automated:        
+      # enable automatic self-healing: by default changes made to live cluster will not trigger automated sync
+      selfHeal: true  
+      # enable automatic prunning: by default automatIC sync will not delete resources
+      prune: true     
